@@ -218,29 +218,29 @@ static Shared_Pointer<T> make_shared(Args&& ... args)
 template <typename T>
 std::map<T*, ControlBlock> Shared_Pointer<T>::control_map = {};
 
-int main()
-{
-	//Unique_Pointer<Point> ptr1 = make_unique<Point>(2, 3);
-	//Unique_Pointer<Point> ptr2 = make_unique<Point>(4, 5);
-	// //Unique_Pointer<Point> ptr1 = ptr2;
-	//Unique_Pointer<Point> ptr = std::move(ptr2);
-	//ptr1.swap(ptr);
-	//std::cout << ptr1->x << " " << ptr1->y << std::endl;
-	//std::cout << ptr->x << " " << ptr->y << std::endl;
-
-	Weak_Pointer<Point> wptr;
-	{
-		Shared_Pointer<Point> ptr = make_shared<Point>(2, 3);
-		Shared_Pointer<Point> ptr1 = ptr;
-		std::cout << ptr.use_count() << std::endl;
-		Shared_Pointer<Point> ptr2 = std::move(ptr);
-		std::cout << ptr2.use_count() << std::endl;
-		wptr = ptr1;
-		std::cout << wptr.use_count() << std::endl;
-		Shared_Pointer<Point> sp = wptr.lock();
-		std::cout <<sp.use_count() << " "<<sp->x<<" "<<sp->y << std::endl;
-	}
-	std::cout << wptr.use_count() << std::endl;
-	Weak_Pointer<Point> wptr1 = make_shared<Point>(4,5);
-	std::cout << wptr1.use_count() << std::endl;
-}
+//int main()
+//{
+//	//Unique_Pointer<Point> ptr1 = make_unique<Point>(2, 3);
+//	//Unique_Pointer<Point> ptr2 = make_unique<Point>(4, 5);
+//	// //Unique_Pointer<Point> ptr1 = ptr2;
+//	//Unique_Pointer<Point> ptr = std::move(ptr2);
+//	//ptr1.swap(ptr);
+//	//std::cout << ptr1->x << " " << ptr1->y << std::endl;
+//	//std::cout << ptr->x << " " << ptr->y << std::endl;
+//
+//	Weak_Pointer<Point> wptr;
+//	{
+//		Shared_Pointer<Point> ptr = make_shared<Point>(2, 3);
+//		Shared_Pointer<Point> ptr1 = ptr;
+//		std::cout << ptr.use_count() << std::endl;
+//		Shared_Pointer<Point> ptr2 = std::move(ptr);
+//		std::cout << ptr2.use_count() << std::endl;
+//		wptr = ptr1;
+//		std::cout << wptr.use_count() << std::endl;
+//		Shared_Pointer<Point> sp = wptr.lock();
+//		std::cout <<sp.use_count() << " "<<sp->x<<" "<<sp->y << std::endl;
+//	}
+//	std::cout << wptr.use_count() << std::endl;
+//	Weak_Pointer<Point> wptr1 = make_shared<Point>(4,5);
+//	std::cout << wptr1.use_count() << std::endl;
+//}

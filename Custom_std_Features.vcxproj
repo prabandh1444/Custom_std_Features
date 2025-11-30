@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\memory_management.cpp" />
     <ClCompile Include="src\smart_pointers.cpp" />
     <ClCompile Include="src\virtual_custom.cpp" />
   </ItemGroup>
