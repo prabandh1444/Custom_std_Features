@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="Custom_std_Features.vcxproj" />
+  <Project Path="Custom_std_Features.vcxproj" Id="ed1026d1-b00d-4ed7-88c9-4a9c30f11e6a" />
 </Solution>
