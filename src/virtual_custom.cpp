@@ -1,19 +1,29 @@
 //#include<iostream>
-//#include<map>
+//#include<unordered_map>
 //#include <typeindex>
 //#include <typeinfo>
+//#include<string>
+//#include <functional>
 //
-//
-//class VtableEntry
+//template<typename T>
+//struct Vtable
 //{
-//
+//	std::function<void(T*)> foo;
+//	std::function<void(T*, int)> bar;
+//	Vtable& operator=(const Vtable& other)
+//	{
+//		foo = other.foo;
+//		bar = other.bar;
+//		return *this;
+//	}
 //};
 //
 //class Entity
 //{
 //public:
 //	int x, y;
-//	static std::map<std::string, VtableEntry> vtable;
+//	
+//	static Vtable<Entity*> vtable;
 //
 //	Entity() : x(0) , y(0) {}
 //
@@ -22,6 +32,10 @@
 //		std::cout << "[Entity] foo" << std::endl;
 //	}
 //
+//	void bar(int x)
+//	{
+//		std::cout << "[Entity] bar" << " " << x << std::endl;
+//	}
 //
 //};
 //
@@ -29,6 +43,8 @@
 //{
 //public:
 //	int damage;
+//
+//	static Vtable<Player*> vtable;
 //
 //	Player() : damage(0) {}
 //
@@ -51,8 +67,14 @@
 //	}
 //};
 //
+//Vtable Entity::vtable = { &Entity::foo ,Entity::bar };
+//
+//Vtable Player::vtable = Entity::vtable;
+//Vtable Player::vtable = { &Player::foo, &Entity::bar };
+//
 //int main()
 //{
 //
+//	Player::Vtable::foo = &Player::foo;
 //}
-
+//

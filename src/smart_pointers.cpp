@@ -25,8 +25,9 @@ public:
 	}
 
 	Unique_Pointer<T>& operator=(const Unique_Pointer<T>& other) = delete;
-	Unique_Pointer<T>& operator=(Unique_Pointer<T>&& other)
+	Unique_Pointer<T>& operator=(Unique_Pointer<T>&& other) noexcept
 	{
+		delete ptr;
 		ptr = other.ptr;
 		other.ptr = nullptr;
 		return *this;
@@ -90,7 +91,6 @@ public:
 	}
 	Shared_Pointer(Shared_Pointer<T>&& other)
 	{
-		if (--control_map[ptr].strong_count == 0) delete ptr;
 		ptr = other.ptr;
 		other.ptr = nullptr;
 	}

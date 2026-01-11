@@ -127,9 +127,25 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="src\CRTP.cpp" />
     <ClCompile Include="src\memory_management.cpp" />
     <ClCompile Include="src\smart_pointers.cpp" />
     <ClCompile Include="src\virtual_custom.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Concurrency\spin_lock.h" />
+    <ClInclude Include="RTTI\Any.h" />
+    <ClInclude Include="RTTI\Function.h" />
+    <ClInclude Include="RTTI\Typeinfo.h" />
+    <ClInclude Include="type_traits\enable_if.h" />
+    <ClInclude Include="type_traits\forward.h" />
+    <ClInclude Include="type_traits\is_same.h" />
+    <ClInclude Include="type_traits\move.h" />
+    <ClInclude Include="type_traits\remove_cv.h" />
+    <ClInclude Include="type_traits\remove_reference.h" />
+    <ClInclude Include="type_traits\typelist.h" />
+    <ClInclude Include="type_traits\variant.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

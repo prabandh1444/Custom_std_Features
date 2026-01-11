@@ -86,19 +86,34 @@ public:
 	~MemoryManagement() { delete[] resource; }
 };
 
-
-int main()
+void* malloc_allign(size_t sz, size_t allignment) noexcept
 {
-	MemoryManagement mem_manager;
-
-	void* p = mem_manager.malloc(20);
-	void* q = mem_manager.malloc(40);
-	void* r = mem_manager.malloc(10);
-	mem_manager.print_freelist();
-	mem_manager.free(q);
-	void* s = mem_manager.malloc(30);
-	mem_manager.print_freelist();
-	mem_manager.free(s);
-	mem_manager.print_freelist();
-
+	// first 8 bytes for storing the original ptr.
+	void* ptr = malloc(sz+allignment-1+sizeof(void*));
+	if (ptr == nullptr) return nullptr;
+	*(void**)ptr = ptr;
+	ptr = ((char*)ptr + sizeof(void*));
+	void* allign_ptr =  (void*)(((uint64_t) ((char*)ptr + (allignment - 1))) & ~(allignment - 1));
+	return allign_ptr;
 }
+
+void free_allign(void* allign_ptr)
+{
+	void* original = *(void**)((char*)allign_ptr - sizeof(void*));
+	free(original);
+}
+//int main()
+//{
+//	MemoryManagement mem_manager;
+//
+//	void* p = mem_manager.malloc(20);
+//	void* q = mem_manager.malloc(40);
+//	void* r = mem_manager.malloc(10);
+//	mem_manager.print_freelist();
+//	mem_manager.free(q);
+//	void* s = mem_manager.malloc(30);
+//	mem_manager.print_freelist();
+//	mem_manager.free(s);
+//	mem_manager.print_freelist();
+//
+//}
