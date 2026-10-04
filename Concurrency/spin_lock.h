@@ -1,21 +1,18 @@
 #pragma once
+#include <atomic>
 
 class Mutex
 {
-	bool lock;
+	std::atomic<bool> lock;
 
 public:
 	Mutex() : lock(false) {}
 	bool aquire() 
 	{
-		while (xchng(lock, 1));
+		while (lock.exchange(true, std::memory_order_acquire));
 	}
 
-	bool release() { lock = false; }
+	bool release() { lock.store(false, std::memory_order_release); }
 };
 
-
-#include <condition_variable>
-
-std::condition_variable c;
 

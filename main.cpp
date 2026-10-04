@@ -2,7 +2,9 @@
 #include "type_traits/remove_reference.h"
 #include "type_traits/remove_cv.h"
 #include "type_traits/typelist.h"
-#include "type_traits/Variant.h"
+//#include "type_traits/Variant.h"
+#include "type_traits/Rank.h"
+#include "type_traits/Vector.h"
 //#include "type_traits/forward.h"
 #include "RTTI/Typeinfo.h"
 #include "RTTI/Any.h"
@@ -112,18 +114,68 @@ static void test_function()
 	f2(2, 0.1f);
 }
 
-static void test_variant()
+//static void test_variant()
+//{
+//	Variant<int, std::string, double> v;
+//	v = 1;
+//	int x = Get<int>(v);
+//	std::cout << x << std::endl;
+//	v = std::string("hello");
+//	std::string s = Get<std::string>(v);
+//	std::cout << s << std::endl;
+//	v = 0.3f;
+//	double d = Get<double>(v);
+//	std::cout << d << std::endl;
+//}
+
+//static void test_Rank()
+//{
+//	std::cout << Rank<int [5][6][7]>::value << std::endl;
+//	std::cout << Rank<int [5][6]>::value << std::endl;
+//	std::cout << Rank<int [5]>::value << std::endl;
+//}
+
+static void test_Vector()
 {
-	Variant<int, std::string, double> v;
-	v = 1;
-	int x = Get<int>(v);
-	std::cout << x << std::endl;
-	v = std::string("hello");
-	std::string s = Get<std::string>(v);
-	std::cout << s << std::endl;
-	v = 0.3f;
-	double d = Get<double>(v);
-	std::cout << d << std::endl;
+	using vec = Vector<1, 2, 3, 4>;
+	Print<vec>::f();
+	using vec1 = PrependT<0, vec>;
+	Print<vec1>::f();
+	/*using vec2 = AppendT<5, vec>;
+	Print<vec2>::f();
+	using vec3 = RemoveFirstT<vec2>;
+	Print<vec3>::f();
+	using vec4 = RemoveAllT<vec3>;
+	Print<vec4>::f();*/
+	
+	/*std::cout << length<vec> << std::endl;
+	std::cout << minimum<vec> << std::endl;*/
+
+	Print<PrefixT<2, vec>>::f();
+	Print<ReverseT<vec>>::f();
+	Print<SuffixT<0, vec>>::f();
+	Print<MergeT<vec, vec1>>::f();
+
+	Print<SortT<Vector <4, 1, 2, 5, 6, 3>>>::f();
+	Print<SortT<Vector <3, 3, 1, 1, 2, 2>>>::f();
+	Print<SortT<Vector <2, 2, 1, 1, 3, 3>>>::f();
+
+	Print<UniqueT<Vector<1, 1, 2, 2, 2, 1, 1>>>::f();
+
+	 static_assert(Get<0, Vector<0,1,2>>::value == 0);
+	 static_assert(Get<1, Vector<0,1,2>>::value == 1);
+	 static_assert(Get<2, Vector<0,1,2>>::value == 2);
+	 
+	 std::cout << LowerBound<3, Vector<0, 1, 2, 3, 4>> << std::endl;
+	 std::cout << LowerBound<3, Vector<0, 1, 2, 4, 5>> << std::endl;
+	 std::cout << LowerBound<9, Vector<0, 1, 2, 4, 5>> << std::endl;
+	 std::cout << LowerBound<-1, Vector<0, 1, 2, 4, 5>> << std::endl;
+	 std::cout << LowerBound<2, Vector<0, 2, 2, 2, 2, 2>> << std::endl;
+
+	 Print<ConcatT<Vector<1, 2>, Vector<3, 4>>>::f();
+
+	 Print<RLET<Vector<0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1>>>::f();
+	 Print<RLET<Vector<1, 1, 1, 1, 9, 9, 9, 2>>>::f();
 }
 
 int main()
@@ -132,5 +184,7 @@ int main()
 	//test_concurrency();
 	//test_semantics();
 	//test_RTTI();
-	test_variant();
+	//test_variant();
+	//test_Rank();
+	test_Vector();
 }

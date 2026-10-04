@@ -130,22 +130,30 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="src\CRTP.cpp" />
     <ClCompile Include="src\memory_management.cpp" />
+    <ClCompile Include="src\runtimecexpr.cpp" />
     <ClCompile Include="src\smart_pointers.cpp" />
     <ClCompile Include="src\virtual_custom.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Concurrency\lock_guard.h" />
+    <ClInclude Include="Concurrency\sleep_lock.h" />
     <ClInclude Include="Concurrency\spin_lock.h" />
+    <ClInclude Include="Concurrency\unique_lock.h" />
+    <ClInclude Include="Memory_Pool\pool.h" />
     <ClInclude Include="RTTI\Any.h" />
     <ClInclude Include="RTTI\Function.h" />
     <ClInclude Include="RTTI\Typeinfo.h" />
+    <ClInclude Include="src\Bitset.h" />
     <ClInclude Include="type_traits\enable_if.h" />
     <ClInclude Include="type_traits\forward.h" />
     <ClInclude Include="type_traits\is_same.h" />
     <ClInclude Include="type_traits\move.h" />
+    <ClInclude Include="type_traits\Rank.h" />
     <ClInclude Include="type_traits\remove_cv.h" />
     <ClInclude Include="type_traits\remove_reference.h" />
     <ClInclude Include="type_traits\typelist.h" />
     <ClInclude Include="type_traits\variant.h" />
+    <ClInclude Include="type_traits\Vector.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
